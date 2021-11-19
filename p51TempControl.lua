@@ -1,6 +1,8 @@
 
 AIRCRAFT = "P-51D"
 
+THIS_AIRCRAFT = hub.getSimString("MetadataStart/_ACFT_NAME")
+
 NEUTRAL = "0"
 CLOSE = "1"
 AUTO = "2"
@@ -27,7 +29,7 @@ COOL.MSG = "coolant NONE"
 hub.sendSimCommand(COOL.COVER, "1")
 
 hub.registerOutputCallback(function()
-	if hub.getSimString("MetadataStart/_ACFT_NAME") == AIRCRAFT then
+	if string.starts(hub.getSimString("MetadataStart/_ACFT_NAME"), AIRCRAFT) then
 		OIL.MSG = setSwitch(OIL.TEMP, OIL.CONTROL, OIL.REDLINE, OIL.LOW, OIL.HIGH)
 		COOL.MSG = setSwitch(COOL.TEMP, COOL.CONTROL, COOL.REDLINE, COOL.LOW, COOL.HIGH)
 	end
@@ -46,4 +48,8 @@ function setSwitch(temp, control, redline, low, high)
       message = tostring(temp) .. " neutral"
 	end
 	return message
+end
+
+function string.starts(String,Start)
+   return string.sub(String,1,string.len(Start))==Start
 end
