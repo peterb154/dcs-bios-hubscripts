@@ -28,3 +28,11 @@ the oil and coolant doors.
   enterEnv("p51TankSwitcher.lua")
   return MESSAGE
   ```
+  
+- [p51YawDamper.lua](./p51YawDamper.lua) - script that adjusts rudder trim to keep ball centered
+
+  Debugging in Lua Console:
+  ```
+  enterEnv("p51YawDamper.lua")
+  return MESSAGE
+  ```

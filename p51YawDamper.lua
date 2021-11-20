@@ -6,31 +6,32 @@ RUDDER.TRIM_CTRL = "RUDDER_TRIM"
 RUDDER.TRIM_VAL = "P-51D/RUDDER_TRIM"
 RUDDER.BALL = "P-51D/SLIPBALL"
 RUDDER.CENTER = 65536 / 2
-RUDDER.TRIM_INCR = 3200 -- 1 degree
+RUDDER.TRIM_INCR = 100 -- 3200 = 1 degree
 MESSAGE = "NONE"
 
 COMFORT_ZONE_PCT = .01
 
 hub.registerOutputCallback(function()
     if string.find(THIS_AIRCRAFT, TARGET_AIRCRAFT) then
-        trim = hub.getSimInteger(RUDDER.TRIM_VAL)
-        ball = hub.getSimInteger(RUDDER.BALL)
-        msg = "center: " .. RUDDER.CENTER .. ", trim: " .. trim .. ", ball: " .. ball
-        new_trim_value = trim
-        if true then -- ball < BALL.CENTER then
-            MESSAGE = "left"
+        trim = tonumber(hub.getSimInteger(RUDDER.TRIM_VAL))
+        ball = tonumber(hub.getSimInteger(RUDDER.BALL))
+        msg = "center= " .. RUDDER.CENTER .. ", current trim: " .. trim .. ", ball: " .. ball
+        trim_adjust = 0
+        if ball < RUDDER.CENTER then
             -- ball is left of center. step on the ball, adding left rudder trim
-            --new_trim_value = trim - RUDDER.TRIM_INCR
-        elseif false then --ball > BALL.CENTER then
-            MESSAGE = "right"
+            msg = msg .. ", ball is left, sub trim:" .. RUDDER.TRIM_INCR
+            trim_adjust = trim_adjust - RUDDER.TRIM_INCR
+        elseif ball > RUDDER.CENTER then
             -- ball is right of center. step on the ball, adding left rudder trim
-            --new_trim_value = trim + RUDDER.TRIM_INCR
+            msg = msg .. ", ball is right, add trim: " .. RUDDER.TRIM_INCR
+            trim_adjust = trim_adjust + RUDDER.TRIM_INCR
         else
-            MESSAGE = "center"
             -- no change required
-            --new_trim_value = trim
+            msg = msg .. ", ball is center"
+            trim_adjust = 0
         end
-        MESSAGE = msg .. ", trimming: " .. new_trim_value
-        hub.sendSimCommand(RUDDER.TRIM_CTRL, new_trim_value)
+        msg = msg .. " , setting " .. RUDDER.TRIM_CTRL .. " adjusting: " .. trim_adjust
+        hub.sendSimCommand(RUDDER.TRIM_CTRL, trim_adjust)
+        MESSAGE = msg .. ". new trim set to: " .. hub.getSimInteger(RUDDER.TRIM_VAL)
     end
 end)
