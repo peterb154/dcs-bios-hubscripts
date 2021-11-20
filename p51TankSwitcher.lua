@@ -15,9 +15,10 @@ MESSAGE = "NONE"
 
 hub.registerOutputCallback(function()
 	if string.find(THIS_AIRCRAFT, TARGET_AIRCRAFT) then
-		lt_tank_gallons = hub.getSimInteger(FUEL.GUA_LEFT)
-		rt_tank_gallons = hub.getSimInteger(FUEL.GUA_LEFT)
-		msg = "lt: " .. lt_tank_gallons .. ", rt: " .. rt_tank_gallons 
+		lt_tank_gallons = tonumber(hub.getSimInteger(FUEL.GUA_LEFT))
+		rt_tank_gallons = tonumber(hub.getSimInteger(FUEL.GUA_RIGHT))
+		msg = "lt: " .. lt_tank_gallons .. ", rt: " .. rt_tank_gallons
+		MESSAGE = msg
 		if rt_tank_gallons > lt_tank_gallons then
 			hub.sendSimCommand(FUEL.SELECTOR, FUEL.SW_RIGHT)
 			MESSAGE = msg .. ", right tank"

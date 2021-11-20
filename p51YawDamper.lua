@@ -16,19 +16,19 @@ hub.registerOutputCallback(function()
         trim = hub.getSimInteger(RUDDER.TRIM_VAL)
         ball = hub.getSimInteger(RUDDER.BALL)
         msg = "center: " .. RUDDER.CENTER .. ", trim: " .. trim .. ", ball: " .. ball
-        MESSAGE = msg .. ", trimming: " .. trim
-        if ball < BALL.CENTER then
+        new_trim_value = trim
+        if true then -- ball < BALL.CENTER then
             MESSAGE = "left"
             -- ball is left of center. step on the ball, adding left rudder trim
-            new_trim_value = trim - RUDDER.TRIM_INCR
-        --elseif ball > BALL.CENTER then
-        --    MESSAGE = "right"
-        --    -- ball is right of center. step on the ball, adding left rudder trim
-        --    new_trim_value = trim + RUDDER.TRIM_INCR
-        --else
-        --    MESSAGE = "center"
-        --    -- no change required
-        --    new_trim_value = trim
+            --new_trim_value = trim - RUDDER.TRIM_INCR
+        elseif false then --ball > BALL.CENTER then
+            MESSAGE = "right"
+            -- ball is right of center. step on the ball, adding left rudder trim
+            --new_trim_value = trim + RUDDER.TRIM_INCR
+        else
+            MESSAGE = "center"
+            -- no change required
+            --new_trim_value = trim
         end
         MESSAGE = msg .. ", trimming: " .. new_trim_value
         hub.sendSimCommand(RUDDER.TRIM_CTRL, new_trim_value)
