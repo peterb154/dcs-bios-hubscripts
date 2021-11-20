@@ -17,5 +17,5 @@ the oil and coolant doors.
   Debugging in Lua Console:
   ```
   enterEnv("tempControl.lua")
-  return THIS_AIRCRAFT .. ", oil: ".. OIL.MSG .. ", coolant: " .. COOL.MSG
+  return THIS_AIRCRAFT .. " power: " .. MP.POWER .. ", oil: ".. OIL.MSG .. " coolant: " .. COOL.MSG
   ```
