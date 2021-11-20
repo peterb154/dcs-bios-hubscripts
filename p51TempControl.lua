@@ -23,7 +23,7 @@ MP.GUA_MIN = 15
 MP.GUA_MAX = 67
 
 MP.MAX_CONT = 50 -- above this number is MIL
-MP.REDLINE = 61 -- above this MP is WEP
+MP.RED_LINE = 61 -- above this MP is WEP
 MP.POWER = "NONE" -- used for debugging
 MP.VALUE = "P-51D/MANIFOLD_PRESSURE"
 
@@ -98,11 +98,11 @@ end
 -- get the target temp for a current mp pressure
 function getTargetTemp(norm_temp, mil_temp, wep_temp)
 	mp = getMp()
-	if mp > MP.MAX_CONT and mp < MP.REDLINE then
+	if mp > MP.MAX_CONT and mp < MP.RED_LINE then
 		-- mil power, set temps to mil
 		MP.POWER = "MIL"
 		return mil_temp
-	elseif mp > MP.REDLINE then
+	elseif mp > MP.RED_LINE then
 		-- wep, set temps to max
 		MP.POWER = "WEP"
 		return wep_temp

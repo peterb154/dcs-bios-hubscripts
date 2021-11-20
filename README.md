@@ -14,8 +14,17 @@ https://dcs-bios.readthedocs.io/en/latest/hub-scripts.html
 ## Scripts
 - [p51TempControl.lua](p51TempControl.lua) - script that maintains p51 oil and engine temp at exactly redline by modulating 
 the oil and coolant doors. 
+
   Debugging in Lua Console:
   ```
   enterEnv("tempControl.lua")
   return THIS_AIRCRAFT .. " power: " .. MP.POWER .. ", oil: ".. OIL.MSG .. " coolant: " .. COOL.MSG
+  ```
+  
+- [p51TankSwitcher.lua](p51TankSwitcher.lua) - script that maintains p51 lt and rt fuel tank with 1 gallon 
+
+  Debugging in Lua Console:
+  ```
+  enterEnv("p51TankSwitcher.lua")
+  return MESSAGE
   ```
