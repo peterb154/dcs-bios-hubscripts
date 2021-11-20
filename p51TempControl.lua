@@ -1,5 +1,11 @@
-AIRCRAFT = "P-51D"
+--[[
+TODOS
+- Determine target coolant temp for wep
+- Determine target oil temp for wep
+]]--
 
+
+TARGET_AIRCRAFT = "51D"
 THIS_AIRCRAFT = hub.getSimString("MetadataStart/_ACFT_NAME")
 
 NEUTRAL = "0"
@@ -11,9 +17,9 @@ COMFORT_ZONE_PCT = .01 -- tolerance for target temp
 
 MP = {}
 -- mapping of sim to gauge values
-MP.SIM_MIN = 20000
-MP.SIM_MAX = 57000
-MP.GUA_MIN = 30
+MP.SIM_MIN = 4889
+MP.SIM_MAX = 57499
+MP.GUA_MIN = 15
 MP.GUA_MAX = 67
 
 MP.MAX_CONT = 50 -- above this number is MIL
@@ -23,10 +29,10 @@ MP.VALUE = "P-51D/MANIFOLD_PRESSURE"
 
 OIL = {}
 -- mapping of sim to gauge values
-OIL.SIM_MIN = 45000
-OIL.SIM_MAX = 58000
-OIL.GUA_MIN = 70
-OIL.GUA_MAX = 91
+OIL.SIM_MIN = 13646
+OIL.SIM_MAX = 64965
+OIL.GUA_MIN = 40
+OIL.GUA_MAX = 100
 
 OIL.NORM = 75 -- target oil temp below mil
 OIL.MIL = 91 -- target oil temp in mil
@@ -39,9 +45,9 @@ hub.sendSimCommand(OIL.COVER, "1") -- open the oil switch cover
 
 COOL = {}
 -- mapping of sim to gauge values
-COOL.SIM_MIN = 48000
-COOL.SIM_MAX = 58000
-COOL.GUA_MIN = 90
+COOL.SIM_MIN = 23166
+COOL.SIM_MAX = 57124
+COOL.GUA_MIN = 0
 COOL.GUA_MAX = 120
 
 COOL.NORM = 105 -- target coolant temp below mil
@@ -55,7 +61,7 @@ hub.sendSimCommand(COOL.COVER, "1") -- open coolant door sw cover
 MESSAGE = "NONE"
 
 hub.registerOutputCallback(function()
-	if THIS_AIRCRAFT == AIRCRAFT or string.starts(THIS_AIRCRAFT, AIRCRAFT) then	
+	if string.find(THIS_AIRCRAFT, TARGET_AIRCRAFT) then	
 		-- get the target oil temp for this mp power setting
 		oil_target_temp = getTargetTemp(OIL.NORM, OIL.MIL, OIL.WEP)
 		-- set the oil switch
@@ -69,9 +75,9 @@ hub.registerOutputCallback(function()
 end)
 
 -- get a gauge output value (120) for a given sim input (75000)
-function map(sim_val, sim_min, sim_max, gua_min, gua_max)
-	MESSAGE =  gua_min
-	return (sim_val - sim_min) * (gua_max - gua_min) / (sim_max - sim_min) + gua_min
+function map(sim_val, sim_min, sim_max, gau_min, gau_max)
+	MESSAGE =  gau_min
+	return math.floor((sim_val - sim_min) * (gau_max - gau_min) / (sim_max - sim_min) + gau_min)
 end
 
 -- get manifold pressure in inches
@@ -127,9 +133,4 @@ function setSwitch(temp, control, target)
 	end
 	hub.sendSimCommand(control, NEUTRAL)
     return message .. ", door: neutral."
-end
-
--- determine if string starts with start
-function string.starts(String,Start)
-   return string.sub(String,1,string.len(Start))==Start
 end
