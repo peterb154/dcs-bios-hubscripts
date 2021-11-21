@@ -102,7 +102,7 @@ function getTargetTemp(norm_temp, mil_temp, wep_temp)
 		-- mil power, set temps to mil
 		MP.POWER = "MIL"
 		return mil_temp
-	elseif mp > MP.RED_LINE then
+	elseif mp >= MP.RED_LINE then
 		-- wep, set temps to max
 		MP.POWER = "WEP"
 		return wep_temp
