@@ -42,6 +42,7 @@ hub.registerOutputCallback(function()
         else
             -- < 3000' and above 500', reset the radar warmup for next time below 500
             TAIL.RADAR_WARM = false
+            hub.sendSimCommand(TAIL.RADAR_POWER, TAIL.RADAR_OFF)
         end
     end
 end)
