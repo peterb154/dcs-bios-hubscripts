@@ -36,7 +36,7 @@ OIL.GUA_MAX = 100
 
 OIL.NORM = 75 -- target oil temp below mil
 OIL.MIL = 90 -- redline = 90
-OIL.WEP = 95 -- max = 100
+OIL.WEP = 90 -- max = 100
 OIL.TEMP = "P-51D/OIL_TEMP"
 OIL.CONTROL = "OIL_CONTROL"
 OIL.COVER = "OIL_CONTROL_COVER"
