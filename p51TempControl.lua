@@ -35,8 +35,8 @@ OIL.GUA_MIN = 40
 OIL.GUA_MAX = 100
 
 OIL.NORM = 75 -- target oil temp below mil
-OIL.MIL = 120 -- target oil temp in mil
-OIL.WEP = 120 -- target oil temp in wep
+OIL.MIL = 90 -- redline = 90
+OIL.WEP = 95 -- max = 100
 OIL.TEMP = "P-51D/OIL_TEMP"
 OIL.CONTROL = "OIL_CONTROL"
 OIL.COVER = "OIL_CONTROL_COVER"
@@ -51,8 +51,8 @@ COOL.GUA_MIN = 0
 COOL.GUA_MAX = 120
 
 COOL.NORM = 105 -- target coolant temp below mil
-COOL.MIL = 120 -- target coolant temp in mil
-COOL.WEP = 147 -- target coolant temp in wep
+COOL.MIL = 120 -- target coolant temp in mil, redline = 120
+COOL.WEP = 145 -- target coolant temp in wep, max = 150
 COOL.TEMP = "P-51D/COOLANT_TEMP"
 COOL.CONTROL = "COOLANT_CONTROL"
 COOL.COVER = "COOLANT_CONTROL_COVER"

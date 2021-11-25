@@ -6,7 +6,7 @@ TODO:
 TARGET_AIRCRAFT = "51D"
 THIS_AIRCRAFT = hub.getSimString("MetadataStart/_ACFT_NAME")
 
-COMFORT_ZONE_PCT = .1 -- the percentage of ball deflection to allow before we start trimming
+COMFORT_ZONE_PCT = .08 -- the percentage of ball deflection to allow before we start trimming
 MESSAGE = "NONE" -- used for debugging
 
 RUDDER = {}
